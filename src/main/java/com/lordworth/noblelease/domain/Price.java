@@ -2,6 +2,7 @@ package com.lordworth.noblelease.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,8 +13,8 @@ public class Price implements Serializable {
     private Float amount;
     private Date startDate;
     private Date endDate;
+    @OneToOne
     private Apartment apartment;
-    private Tenant tenant;
 
     public Integer getId() {
         return id;
@@ -55,11 +56,4 @@ public class Price implements Serializable {
         this.apartment = apartment;
     }
 
-    public Tenant getTenant() {
-        return tenant;
-    }
-
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
-    }
 }

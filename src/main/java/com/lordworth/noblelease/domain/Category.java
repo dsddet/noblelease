@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Category implements Serializable {
     @Id
     private Integer Id;
-    private String type;
+    private String description;
 
     public Integer getId() {
         return Id;
@@ -18,11 +18,12 @@ public class Category implements Serializable {
         Id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getDescription() {
+        return description;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
 }

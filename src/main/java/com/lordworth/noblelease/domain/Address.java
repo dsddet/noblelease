@@ -1,11 +1,13 @@
 package com.lordworth.noblelease.domain;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class Address implements Serializable {
+    @Id
     private Integer id;
+    @Column(name="streetname")
     private String streetName;
     private String village;
 

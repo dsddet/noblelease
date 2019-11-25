@@ -2,12 +2,14 @@ package com.lordworth.noblelease.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Entity
 public class Apartment implements Serializable {
     @Id
     private Integer id;
+    @ManyToOne
     private Building building;
     private Boolean isOccupied;
 

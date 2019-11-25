@@ -9,7 +9,7 @@ import java.util.Date;
 public class Role implements Serializable {
     @Id
     private Integer id;
-    private String role;
+    private String description;
     private String password;
     private Date expirationDate;
 
@@ -21,12 +21,12 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getDescription() {
+        return description;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPassword() {

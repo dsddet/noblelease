@@ -16,7 +16,7 @@ public class Tenant implements Serializable {
     private String governmentId;
     private Integer agreeementId;
     private Integer emegencyContact;
-    private String relationship;
+    private String emegencyContactRelationship;
 
 
     public Integer getId() {
@@ -91,11 +91,11 @@ public class Tenant implements Serializable {
         this.emegencyContact = emegencyContact;
     }
 
-    public String getRelationship() {
-        return relationship;
+    public String getEmegencyContactRelationship() {
+        return emegencyContactRelationship;
     }
 
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
+    public void setEmegencyContactRelationship(String emegencyContactRelationship) {
+        this.emegencyContactRelationship = emegencyContactRelationship;
     }
 }

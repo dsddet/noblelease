@@ -1,7 +1,6 @@
 package com.lordworth.noblelease.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,8 +9,12 @@ public class Building implements Serializable {
     @Id
     private Integer id;
     private String name;
+    @ManyToOne
     private Land land;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Building_id")
     private List<Apartment> apartmentList;
+    @OneToOne
     private Category category;
 
     public Integer getId() {

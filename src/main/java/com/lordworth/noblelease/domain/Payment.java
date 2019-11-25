@@ -1,13 +1,18 @@
 package com.lordworth.noblelease.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 public class Payment implements Serializable {
+    @Id
     private Integer id;
+    @OneToOne
     private Tenant tenant;
+    @OneToOne
     private Apartment apartment;
     private Float amount;
     private Date datePaid;
