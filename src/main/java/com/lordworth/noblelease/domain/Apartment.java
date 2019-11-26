@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Entity
-public class Apartment implements Serializable {
+public class Apartment implements Serializable,Comparable<Apartment> {
     @Id
     private Integer id;
     @ManyToOne
@@ -35,5 +35,26 @@ public class Apartment implements Serializable {
 
     public void setOccupied(Boolean occupied) {
         isOccupied = occupied;
+    }
+
+    @Override
+    public int compareTo( Apartment apartment) {
+        return apartment.getId()+building.getId()-apartment.getId()-apartment.getBuilding().getId();
+    }
+
+    @Override
+    public String toString(){
+        return building.getName()+"-"+id;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        Apartment apartment=(Apartment) object;
+        return (building.getName().length()+id)==(apartment.getBuilding().getName().length()+apartment.getId());
+    }
+
+    @Override
+    public int hashCode(){
+        return id*building.getName().length()*11;
     }
 }

@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Bill implements Serializable {
+public class Bill implements Serializable,Comparable<Bill> {
 
     @Id
     private Integer id;
@@ -15,13 +15,20 @@ public class Bill implements Serializable {
     private Tenant tenant;
     @OneToOne
     private Apartment apartment;
-    private Integer priceId;
+    @OneToOne
+    private Price price;
     private Date startDate;
     private Date dueDate;
     private Boolean isCleared;
     private Integer daysBilled;
 
+    public Price getPrice() {
+        return price;
+    }
 
+    public void setPrice(Price price) {
+        this.price = price;
+    }
 
     public Integer getId() {
         return id;
@@ -45,14 +52,6 @@ public class Bill implements Serializable {
 
     public void setApartment(Apartment apartment) {
         this.apartment = apartment;
-    }
-
-    public Integer getPriceId() {
-        return priceId;
-    }
-
-    public void setPriceId(Integer priceId) {
-        this.priceId = priceId;
     }
 
     public Date getStartDate() {
@@ -84,5 +83,26 @@ public class Bill implements Serializable {
 
     public void setDaysBilled(Integer daysBilled) {
         this.daysBilled = daysBilled;
+    }
+
+    @Override
+    public int compareTo(Bill bill) {
+        return id-bill.getId();
+    }
+
+    @Override
+    public String toString(){
+        return "$"+price.getAmount()+" owed by "+tenant+" apt:"+apartment.getId();
+    }
+
+    @Override
+    public boolean equals(Object object){
+        Bill bill=(Bill) object;
+        return id.equals(bill.getId());
+    }
+
+    @Override
+    public int hashCode(){
+        return id*11;
     }
 }

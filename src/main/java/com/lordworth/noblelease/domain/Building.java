@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Building implements Serializable {
+public class Building implements Serializable,Comparable<Building> {
     @Id
     private Integer id;
     private String name;
@@ -59,5 +59,26 @@ public class Building implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public int compareTo(Building building) {
+        return id-building.getId();
+    }
+
+    @Override
+    public String toString(){
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        Building building=(Building) object;
+        return id.equals(building.getId());
+    }
+
+    @Override
+    public int hashCode(){
+        return id*11;
     }
 }

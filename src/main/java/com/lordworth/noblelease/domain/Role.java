@@ -6,11 +6,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Role implements Serializable {
+public class Role implements Serializable,Comparable<Role> {
     @Id
     private Integer id;
     private String description;
-    private String password;
     private Date expirationDate;
 
     public Integer getId() {
@@ -29,13 +28,6 @@ public class Role implements Serializable {
         this.description = description;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public Date getExpirationDate() {
         return expirationDate;
@@ -43,5 +35,26 @@ public class Role implements Serializable {
 
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    @Override
+    public int compareTo(Role role) {
+        return id-role.getId();
+    }
+
+    @Override
+    public String toString(){
+        return description;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        Role role=(Role) object;
+        return id==role.getId();
+    }
+
+    @Override
+    public int hashCode(){
+        return id*11;
     }
 }

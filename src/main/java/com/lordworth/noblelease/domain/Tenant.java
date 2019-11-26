@@ -3,9 +3,10 @@ package com.lordworth.noblelease.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-public class Tenant implements Serializable {
+public class Tenant implements Serializable,Comparable<Tenant> {
     @Id
     private Integer id;
     private String firstName;
@@ -17,7 +18,16 @@ public class Tenant implements Serializable {
     private Integer agreeementId;
     private Integer emegencyContact;
     private String emegencyContactRelationship;
+    private Date dateOfBirth;
 
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public Integer getId() {
         return id;
@@ -97,5 +107,26 @@ public class Tenant implements Serializable {
 
     public void setEmegencyContactRelationship(String emegencyContactRelationship) {
         this.emegencyContactRelationship = emegencyContactRelationship;
+    }
+
+    @Override
+    public int compareTo(Tenant tenant) {
+        return id-tenant.getId();
+    }
+
+    @Override
+    public String toString(){
+        return firstName+" "+lastName;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        Tenant tenant=(Tenant) object;
+        return id.equals(tenant.getId());
+    }
+
+    @Override
+    public int hashCode(){
+        return id*11;
     }
 }
