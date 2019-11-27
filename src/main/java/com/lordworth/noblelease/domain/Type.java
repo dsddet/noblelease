@@ -5,16 +5,16 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Category implements Serializable,Comparable<Category> {
+public class Type implements Serializable,Comparable<Type> {
     @Id
-    private Integer id;
+    private String id;
     private String description;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -27,8 +27,8 @@ public class Category implements Serializable,Comparable<Category> {
     }
 
     @Override
-    public int compareTo(Category category) {
-        return id-category.getId();
+    public int compareTo(Type type) {
+        return id.compareTo(type.getId());
     }
 
     @Override
@@ -38,13 +38,16 @@ public class Category implements Serializable,Comparable<Category> {
 
     @Override
     public boolean equals(Object object){
-        Category category=(Category) object;
-        return id==category.getId();
+        boolean answer=false;
+        if(this.getClass()==object.getClass()){
+        Type type =(Type) object;
+        answer= id.equals(type.getId());}
+        return answer;
     }
 
     @Override
     public int hashCode(){
-        return id*11;
+        return id.hashCode()*11;
     }
 
 }

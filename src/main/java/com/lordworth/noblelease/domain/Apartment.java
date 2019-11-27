@@ -1,17 +1,26 @@
 package com.lordworth.noblelease.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class Apartment implements Serializable,Comparable<Apartment> {
     @Id
     private Integer id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Building building;
-    private Boolean isOccupied;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Tenant tenant;
+    @OneToOne
+    private Price price;
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
 
     public Integer getId() {
         return id;
@@ -29,12 +38,12 @@ public class Apartment implements Serializable,Comparable<Apartment> {
         this.building = building;
     }
 
-    public Boolean getOccupied() {
-        return isOccupied;
+    public Tenant getTenant() {
+        return tenant;
     }
 
-    public void setOccupied(Boolean occupied) {
-        isOccupied = occupied;
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 
     @Override
@@ -49,8 +58,12 @@ public class Apartment implements Serializable,Comparable<Apartment> {
 
     @Override
     public boolean equals(Object object){
-        Apartment apartment=(Apartment) object;
-        return (building.getName().length()+id)==(apartment.getBuilding().getName().length()+apartment.getId());
+        boolean answer=false;
+        if(this.getClass()==object.getClass()){
+            Apartment apartment=(Apartment) object;
+            answer= (building.getName().length()+id)==(apartment.getBuilding().getName().length()+apartment.getId());
+        }
+        return answer;
     }
 
     @Override

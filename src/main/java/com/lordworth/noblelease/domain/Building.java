@@ -2,7 +2,7 @@ package com.lordworth.noblelease.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Building implements Serializable,Comparable<Building> {
@@ -12,10 +12,22 @@ public class Building implements Serializable,Comparable<Building> {
     @ManyToOne
     private Land land;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Building_id")
-    private List<Apartment> apartmentList;
+    @JoinColumn(name = "building_id")
+    private Set<Apartment> apartmentSet;
     @OneToOne
-    private Category category;
+    private Type typeOfBulding;
+
+    public Set<Apartment> getApartmentSet() {
+        return apartmentSet;
+    }
+
+    public void setApartmentSet(Set<Apartment> apartmentSet) {
+        this.apartmentSet = apartmentSet;
+    }
+
+    public void addApartmentToSet(Apartment apartment) {
+        this.apartmentSet.add(apartment);
+    }
 
     public Integer getId() {
         return id;
@@ -41,24 +53,12 @@ public class Building implements Serializable,Comparable<Building> {
         this.land = land;
     }
 
-    public List<Apartment> getApartmentList() {
-        return apartmentList;
+    public Type getTypeOfBulding() {
+        return typeOfBulding;
     }
 
-    public void setApartmentList(List<Apartment> apartmentList) {
-        this.apartmentList = apartmentList;
-    }
-
-    public void addApartmentList(Apartment apartment) {
-        this.apartmentList.add(apartment);
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setTypeOfBulding(Type typeOfBulding) {
+        this.typeOfBulding = typeOfBulding;
     }
 
     @Override
@@ -73,8 +73,11 @@ public class Building implements Serializable,Comparable<Building> {
 
     @Override
     public boolean equals(Object object){
+        boolean answer=false;
+        if(this.getClass()==object.getClass()){
         Building building=(Building) object;
-        return id.equals(building.getId());
+        answer= id.equals(building.getId());}
+        return answer;
     }
 
     @Override

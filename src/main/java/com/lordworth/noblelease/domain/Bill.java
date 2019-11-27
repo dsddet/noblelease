@@ -15,19 +15,16 @@ public class Bill implements Serializable,Comparable<Bill> {
     private Tenant tenant;
     @OneToOne
     private Apartment apartment;
-    @OneToOne
-    private Price price;
     private Date startDate;
     private Date dueDate;
-    private Boolean isCleared;
-    private Integer daysBilled;
+    private Float arrears;
 
-    public Price getPrice() {
-        return price;
+    public Float getArrears() {
+        return arrears;
     }
 
-    public void setPrice(Price price) {
-        this.price = price;
+    public void setArrears(Float arrears) {
+        this.arrears = arrears;
     }
 
     public Integer getId() {
@@ -70,21 +67,6 @@ public class Bill implements Serializable,Comparable<Bill> {
         this.dueDate = dueDate;
     }
 
-    public Boolean getCleared() {
-        return isCleared;
-    }
-
-    public void setCleared(Boolean cleared) {
-        isCleared = cleared;
-    }
-    public Integer getDaysBilled() {
-        return daysBilled;
-    }
-
-    public void setDaysBilled(Integer daysBilled) {
-        this.daysBilled = daysBilled;
-    }
-
     @Override
     public int compareTo(Bill bill) {
         return id-bill.getId();
@@ -92,13 +74,17 @@ public class Bill implements Serializable,Comparable<Bill> {
 
     @Override
     public String toString(){
-        return "$"+price.getAmount()+" owed by "+tenant+" apt:"+apartment.getId();
+        return "$"+apartment.getPrice();
     }
 
     @Override
     public boolean equals(Object object){
-        Bill bill=(Bill) object;
-        return id.equals(bill.getId());
+        boolean answer=false;
+        if(this.getClass()==object.getClass()){
+            Bill bill=(Bill) object;
+            answer =id.equals(bill.getId());
+        }
+        return answer;
     }
 
     @Override

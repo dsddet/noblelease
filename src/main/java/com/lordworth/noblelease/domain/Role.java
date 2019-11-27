@@ -49,8 +49,14 @@ public class Role implements Serializable,Comparable<Role> {
 
     @Override
     public boolean equals(Object object){
-        Role role=(Role) object;
-        return id==role.getId();
+        boolean answer=false;
+        if(this.getClass()==object.getClass()){
+            Role role=(Role) object;
+            answer= id==role.getId();
+        }
+
+        return answer;
+
     }
 
     @Override

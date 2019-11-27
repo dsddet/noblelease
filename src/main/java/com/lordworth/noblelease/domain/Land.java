@@ -3,16 +3,17 @@ package com.lordworth.noblelease.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-public class Land implements Serializable {
+public class Land implements Serializable, Comparable<Land> {
     @Id
     private Integer id;
     private Float length;
     private Float width;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="land_id")
-    private List<Building> buildingList;
+    private Set<Building> buildingSet;
     @OneToOne
     private Address address;
     private Integer landTitleId;
@@ -50,16 +51,16 @@ public class Land implements Serializable {
         this.width = width;
     }
 
-    public List<Building> getBuildingList() {
-        return buildingList;
+    public Set<Building> getBuildingSet() {
+        return buildingSet;
     }
 
-    public void setBuildingList(List<Building> buildingList) {
-        this.buildingList = buildingList;
+    public void setBuildingSet(Set<Building> buildingSet) {
+        this.buildingSet = buildingSet;
     }
 
-    public void addBuildingToList(Building building) {
-        this.buildingList.add(building);
+    public void addToBuildingSet(Building building) {
+        this.buildingSet.add(building);
     }
 
     public Address getAddress() {
@@ -76,5 +77,29 @@ public class Land implements Serializable {
 
     public void setLandTitleId(Integer landTitleId) {
         this.landTitleId = landTitleId;
+    }
+
+    @Override
+    public int compareTo(Land land) {
+        return id-land.getId();
+    }
+
+    @Override
+    public String toString(){
+        return description+" In "+address;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        boolean answer=false;
+        if(this.getClass()==object.getClass()){
+            Land land=(Land) object;
+            answer= id==land.getId();}
+        return answer;
+    }
+
+    @Override
+    public int hashCode(){
+        return id*11;
     }
 }

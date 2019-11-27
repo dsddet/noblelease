@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Price implements Serializable {
+public class Price implements Serializable, Comparable<Price> {
     @Id
     private Integer id;
     private Float amount;
@@ -54,6 +54,30 @@ public class Price implements Serializable {
 
     public void setApartment(Apartment apartment) {
         this.apartment = apartment;
+    }
+
+    @Override
+    public int compareTo(Price price) {
+        return id-price.getId();
+    }
+
+    @Override
+    public String toString(){
+        return amount.toString();
+    }
+
+    @Override
+    public boolean equals(Object object){
+        boolean answer=false;
+        if(this.getClass()==object.getClass()){
+            Price price=(Price) object;
+            answer= id==price.getId();}
+        return answer;
+    }
+
+    @Override
+    public int hashCode(){
+        return id*11;
     }
 
 }

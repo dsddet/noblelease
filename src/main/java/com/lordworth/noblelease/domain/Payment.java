@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Payment implements Serializable {
+public class Payment implements Serializable,Comparable<Payment> {
     @Id
     private Integer id;
     @OneToOne
@@ -17,6 +17,15 @@ public class Payment implements Serializable {
     private Float amount;
     private Date datePaid;
     private String paymentDescription;
+    private Boolean isProcessed;
+
+    public Boolean getProcessed() {
+        return isProcessed;
+    }
+
+    public void setProcessed(Boolean processed) {
+        isProcessed = processed;
+    }
 
     public Integer getId() {
         return id;
@@ -64,5 +73,29 @@ public class Payment implements Serializable {
 
     public void setPaymentDescription(String paymentDescription) {
         this.paymentDescription = paymentDescription;
+    }
+
+    @Override
+    public int compareTo(Payment payment) {
+        return id-payment.getId();
+    }
+
+    @Override
+    public String toString(){
+        return amount.toString();
+    }
+
+    @Override
+    public boolean equals(Object object){
+        boolean answer=false;
+        if(this.getClass()==object.getClass()){
+            Payment payment=(Payment) object;
+            answer= id==payment.getId();}
+        return answer;
+    }
+
+    @Override
+    public int hashCode(){
+        return id*11;
     }
 }

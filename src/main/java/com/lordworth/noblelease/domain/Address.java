@@ -47,8 +47,13 @@ public class Address implements Serializable,Comparable<Address> {
 
     @Override
     public boolean equals(Object object){
-        Address address=(Address) object;
-        return id.equals(address.getId())&&village.equals(address.getVillage())&&streetName.equals(address.getStreetName());
+        boolean answer=false;
+        if(this.getClass()==object.getClass()){
+            Address address=(Address) object;
+            answer= id.equals(address.getId())&&village.equals(address.getVillage())&&streetName.equals(address.getStreetName());
+        }
+
+        return answer;
     }
 
     @Override
