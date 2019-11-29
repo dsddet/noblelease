@@ -1,4 +1,4 @@
-package com.lordworth.noblelease.Service.Implementation;
+package com.lordworth.noblelease.Service;
 
 import com.lordworth.noblelease.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
