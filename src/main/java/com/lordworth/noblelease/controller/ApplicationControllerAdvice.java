@@ -9,6 +9,6 @@ public class ApplicationControllerAdvice {
 
     @ExceptionHandler({TenantException.class,Exception.class})
     public String handleTenantException(Exception ex) {
-        return "Exception Occured in Tenant, needs handling";
+        return "In ControllerAdvice: "+ex.getMessage();
     }
 }

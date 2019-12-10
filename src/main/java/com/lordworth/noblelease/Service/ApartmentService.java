@@ -15,6 +15,7 @@ public interface ApartmentService {
     public Set<Apartment> getApartmentsByRange(Integer start,Integer end);
     public Set<Apartment> getApartmentsByBuilding(Integer buildingId);
     public Set<Apartment> getApartmentsByProperty(String propertyName);
+    public Set<Apartment> getApartmentByPrice(Float price);
 
     //Command
     public void addApartment(Apartment apartment);

@@ -4,6 +4,7 @@ import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,12 +14,12 @@ public class Tenant implements Serializable,Comparable<Tenant> {
     private Integer id;
     private String firstName;
     private String lastName;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private String email;
     private String governmentId;
-    private Integer emegencyContact;
+    private String emegencyContact;
     private String emegencyContactRelationship;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "tenant_id",nullable = true)
     private Set<Apartment> apartmentSet;
@@ -35,11 +36,11 @@ public class Tenant implements Serializable,Comparable<Tenant> {
         apartmentSet.add(apartment);
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -67,11 +68,11 @@ public class Tenant implements Serializable,Comparable<Tenant> {
         this.lastName = lastName;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -91,11 +92,11 @@ public class Tenant implements Serializable,Comparable<Tenant> {
         this.governmentId = governmentId;
     }
 
-    public Integer getEmegencyContact() {
+    public String getEmegencyContact() {
         return emegencyContact;
     }
 
-    public void setEmegencyContact(Integer emegencyContact) {
+    public void setEmegencyContact(String emegencyContact) {
         this.emegencyContact = emegencyContact;
     }
 
@@ -122,7 +123,7 @@ public class Tenant implements Serializable,Comparable<Tenant> {
         boolean answer=false;
         if(this.getClass()==object.getClass()){
             Tenant tenant=(Tenant) object;
-            answer= id.equals(tenant.getId());
+            answer= id.equals(tenant);
         }
         return answer;
     }
